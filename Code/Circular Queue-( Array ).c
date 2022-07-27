@@ -1,8 +1,8 @@
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>//c99被引入的標準函式庫
-#define Max 10
-//Array實作queue-------------------------------------- 
+#include <stdbool.h>
+#define Max 5
+
 int queue[Max];
 int front = 0;
 int rear = 0;
@@ -10,37 +10,56 @@ void addq(int);
 int deleteq();
 int queueFull();
 int queueempty();
-//-------------------------------------- 
-int main(void) 
-{  
 
-	system("pause");
+int main(void)
+{
+    addq(5);
+    addq(10);
+    addq(16);
+    addq(20);
+    addq(3);
+
+    deleteq();
+    deleteq();
+    deleteq();
+    deleteq();
+    deleteq();
+
 	return 0;
 }
-void addq(int add)
+
+void addq(int data)
 {
 	if(front==(rear+1)%Max)
 	{
 		queueFull();
+		printf("Queue is full\n\n");
 	}
 	else
-	{	
-		queue[rear]=add;
-		rear=(rear+1)%Max;
+	{
+		queue[rear] = data;
+		rear = (rear+1)%Max;
+		printf("Add %d to queue\n", data);
 	}
 }
+
 int deleteq()
 {
+    int data;
 	if(front==rear)
 	{
-		queueempty();//GCC對於沒有return的函數會直接返回eax寄存器裡面的值。
+		queueEmpty(); //GCC will directly return the value in the eax register for functions without return
+		printf("Queue is empty\n\n");
 	}
 	else
 	{
+	    data = queue[front];
 		front = (front+1)%Max;
-		return queue[front];
+		printf("Delete %d from queue\n", data);
+		return data;
 	}
 }
+
 int queueFull()
 {
 	if(front==(rear+1)%Max)
@@ -52,9 +71,10 @@ int queueFull()
 		return 0;
 	}
 }
-int queueempty()
+
+int queueEmpty()
 {
-	if(front=rear)
+	if(front==rear)
 	{
 		return 1;
 	}

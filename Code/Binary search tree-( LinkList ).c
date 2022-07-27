@@ -1,10 +1,11 @@
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <stdio.h>
-typedef struct Node { 
-	int data;				//資料 
-	struct Node *rootnode;	//父節點 
-	struct Node *leftnode;	//左節點 
-    struct Node *rightnode;	//右節點 
+
+typedef struct Node {
+	int data;
+	struct Node *rootnode;
+	struct Node *leftnode;
+    struct Node *rightnode;
 }TreeNode;
 
 void Add_TreeNode(TreeNode**,TreeNode **,int);
@@ -13,8 +14,8 @@ void Inorder(TreeNode*);
 void Postorder(TreeNode*);
 TreeNode *Tree1_root = NULL;
 
-int main(void) 
-{  
+int main(void)
+{
 	Add_TreeNode(&Tree1_root,&Tree1_root,10);
 	Add_TreeNode(&Tree1_root,&Tree1_root,5);
 	Add_TreeNode(&Tree1_root,&Tree1_root,6);
@@ -23,17 +24,22 @@ int main(void)
 	Add_TreeNode(&Tree1_root,&Tree1_root,9);
 	Add_TreeNode(&Tree1_root,&Tree1_root,7);
 	Add_TreeNode(&Tree1_root,&Tree1_root,1);
-	printf("Preorder: ");
+
+	printf("\nPreorder: ");
 	Preorder(Tree1_root);
+
 	printf("\nInorder: ");
 	Inorder(Tree1_root);
+
 	printf("\nPostorder: ");
 	Postorder(Tree1_root);
+
 	return 0;
 }
 
 void Add_TreeNode(TreeNode **node,TreeNode **rootnode,int data)
 {
+
 	if(*node==NULL)
 	{
 		TreeNode *newnode;
@@ -43,17 +49,19 @@ void Add_TreeNode(TreeNode **node,TreeNode **rootnode,int data)
 		newnode->leftnode = NULL;
 		newnode->rightnode = NULL;
 		*node=newnode;
-	} 
+		printf("Add %d node\n", data);
+	}
 	else if((*node)->data>data)
 	{
-		Add_TreeNode(&((*node)->leftnode),node,data);
+		Add_TreeNode(&((*node)->leftnode), node, data);
 	}
 	else if((*node)->data<=data)
 	{
-		Add_TreeNode(&((*node)->rightnode),node,data);
+		Add_TreeNode(&((*node)->rightnode), node, data);
 	}
 }
-void Preorder(TreeNode* node) 
+
+void Preorder(TreeNode* node)
 {
 	if(node!=NULL)
 	{
@@ -62,16 +70,18 @@ void Preorder(TreeNode* node)
 		Preorder(node->rightnode);
 	}
 }
-void Inorder(TreeNode* node) 
+
+void Inorder(TreeNode* node)
 {
 	if(node!=NULL)
 	{
 		Inorder(node->leftnode);
-		printf("%d ",node->data);
+        printf("%d ",node->data);
 		Inorder(node->rightnode);
 	}
 }
-void Postorder(TreeNode* node) 
+
+void Postorder(TreeNode* node)
 {
 	if(node!=NULL)
 	{
